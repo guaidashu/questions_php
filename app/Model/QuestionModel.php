@@ -2,52 +2,28 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class UserModel extends Model implements BaseModel
+class QuestionModel extends Model implements BaseModel
 {
-
     /**
      * 表名
      *
-     * @var string
+     * @var
      */
     private $tableName;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * QuestionModel constructor.
+     * @param array $attributes
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->tableName = 'user';
+        $this->tableName = 'question';
     }
 
     /**
@@ -56,14 +32,14 @@ class UserModel extends Model implements BaseModel
     public function initTable()
     {
         // TODO: Implement initTable() method.
-        // 判断表是否存在
         if (!Schema::hasTable($this->tableName)) {
-            Schema::create('user', function (Blueprint $table) {
-                $table->id()->comment('主键, 唯一id');
-                $table->string('username')->comment('用户名');;
-                $table->string('password')->comment('用户密码');
-                $table->string('remember_token')->comment('记录token');
-                $table->string('email')->comment('邮箱');
+            Schema::create($this->tableName, function (Blueprint $table) {
+                $table->id()->comment('主键id');
+                $table->text('content')->comment('问题内容');
+                $table->unsignedTinyInteger('sex')->comment('性别');
+                $table->text('rate')->comment('分数序列化json数据');
+                $table->unsignedSmallInteger('body_type')->comment('体质类型');
+                // $table->string('')->comment('');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
                 $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
             });
@@ -73,7 +49,7 @@ class UserModel extends Model implements BaseModel
     /**
      * 获取表名
      *
-     * @return string
+     * @return mixed
      */
     public function tableName()
     {
@@ -85,7 +61,7 @@ class UserModel extends Model implements BaseModel
      * 插入数据
      *
      * @param $insertData
-     * @return int
+     * @return mixed
      */
     public function insert($insertData)
     {

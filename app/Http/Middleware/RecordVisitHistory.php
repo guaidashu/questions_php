@@ -17,7 +17,7 @@ class RecordVisitHistory
      */
     public function handle($request, Closure $next)
     {
-        Log::info("/" . $request->path());
+        Log::info("/" . $request->path() . "   method: " . $request->method());
         return $next($request);
     }
 }
