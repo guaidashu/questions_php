@@ -13,6 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get("/", 'IndexController@index');
+
+Route::prefix('admin')->group(function () {
+    Route::get('getData', 'admin\QuestionController@getData');
+    Route::post('login', 'admin\UserController@login');
+    Route::get('get_info', 'admin\UserController@getInfo');
 });
+
+Route::prefix('api')->group(function () {
+    Route::get('init_table', 'api\CreateTableController@createTable');
+});
+
