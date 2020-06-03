@@ -64,8 +64,8 @@ class UserModel extends Model implements BaseModel
                 $table->string("password")->comment('用户密码');
                 $table->string("remember_token")->comment('记录token');
                 $table->string("email")->comment('邮箱');
-                $table->integer('create_time')->comment('创建时间');
-                $table->integer('update_time')->comment('更新时间');
+                $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
+                $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
             });
         }
     }

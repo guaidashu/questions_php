@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Model\UserModel;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class CreateTableController extends Controller
 {
@@ -18,6 +19,7 @@ class CreateTableController extends Controller
      */
     public function createTable()
     {
+        Log::info("createTable");
         $arr = array(
             new UserModel()
         );
