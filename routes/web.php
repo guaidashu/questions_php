@@ -27,5 +27,7 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('api')->group(function () {
     Route::get('init_table', 'api\CreateTableController@createTable');
+    Route::get('test_token', 'api\TestController@testToken')->middleware("check_token");
+    Route::get('error', 'api\ErrorController@error')->name("api_error");
 });
 
