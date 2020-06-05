@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Schema;
 
 class PhysiqueModel extends Model implements BaseModel
 {
-    private $tableName;
+    protected $table;
 
     /**
      * 构造函数
@@ -25,7 +25,7 @@ class PhysiqueModel extends Model implements BaseModel
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->tableName = "physique";
+        $this->table = "physique";
     }
 
     /**
@@ -35,12 +35,14 @@ class PhysiqueModel extends Model implements BaseModel
     public function initTable()
     {
         // TODO: Implement initTable() method.
-        if (!Schema::hasTable($this->tableName)) {
-            Schema::create($this->tableName, function (Blueprint $table) {
+        if (!Schema::hasTable($this->table)) {
+            Schema::create($this->table, function (Blueprint $table) {
                 $table->id()->comment('唯一主键id');
                 $table->integer('level')->comment('题目显示优先级');
                 $table->string('name')->comment('体质名字');
                 $table->string('desc')->comment('体质描述');
+                $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
+                $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
             });
         }
     }
@@ -53,7 +55,7 @@ class PhysiqueModel extends Model implements BaseModel
     public function getTableName()
     {
         // TODO: Implement getTableName() method.
-        return $this->tableName;
+        return $this->table;
     }
 
     /**
@@ -65,6 +67,6 @@ class PhysiqueModel extends Model implements BaseModel
     public function insert($insertData)
     {
         // TODO: Implement insert() method.
-        return DB::table($this->tableName)->insertGetId($insertData);
+        return DB::table($this->table)->insertGetId($insertData);
     }
 }

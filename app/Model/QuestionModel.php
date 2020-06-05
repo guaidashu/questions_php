@@ -14,7 +14,7 @@ class QuestionModel extends Model implements BaseModel
      *
      * @var
      */
-    private $tableName;
+    protected $table;
 
     /**
      * QuestionModel constructor.
@@ -23,7 +23,7 @@ class QuestionModel extends Model implements BaseModel
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->tableName = 'question';
+        $this->table = 'question';
     }
 
     /**
@@ -32,8 +32,8 @@ class QuestionModel extends Model implements BaseModel
     public function initTable()
     {
         // TODO: Implement initTable() method.
-        if (!Schema::hasTable($this->tableName)) {
-            Schema::create($this->tableName, function (Blueprint $table) {
+        if (!Schema::hasTable($this->table)) {
+            Schema::create($this->table, function (Blueprint $table) {
                 $table->id()->comment('主键id');
                 $table->text('content')->comment('问题内容');
                 $table->unsignedTinyInteger('sex')->comment('性别');
@@ -54,7 +54,7 @@ class QuestionModel extends Model implements BaseModel
     public function getTableName()
     {
         // TODO: Implement getTableName() method.
-        return $this->tableName;
+        return $this->table;
     }
 
     /**
@@ -66,6 +66,6 @@ class QuestionModel extends Model implements BaseModel
     public function insert($insertData)
     {
         // TODO: Implement insert() method.
-        return DB::table($this->tableName)->insertGetId($insertData);
+        return DB::table($this->table)->insertGetId($insertData);
     }
 }

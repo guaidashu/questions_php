@@ -15,7 +15,7 @@ class UserModel extends Model implements BaseModel
      *
      * @var string
      */
-    private $tableName;
+    protected $table;
 
     /**
      * The attributes that are mass assignable.
@@ -47,7 +47,7 @@ class UserModel extends Model implements BaseModel
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->tableName = 'user';
+        $this->table = 'user';
     }
 
     /**
@@ -57,7 +57,7 @@ class UserModel extends Model implements BaseModel
     {
         // TODO: Implement initTable() method.
         // 判断表是否存在
-        if (!Schema::hasTable($this->tableName)) {
+        if (!Schema::hasTable($this->table)) {
             Schema::create('user', function (Blueprint $table) {
                 $table->id()->comment('主键, 唯一id');
                 $table->string('username')->comment('用户名');;
@@ -78,7 +78,7 @@ class UserModel extends Model implements BaseModel
     public function getTableName()
     {
         // TODO: Implement getTableName() method.
-        return $this->tableName;
+        return $this->table;
     }
 
     /**
@@ -90,6 +90,6 @@ class UserModel extends Model implements BaseModel
     public function insert($insertData)
     {
         // TODO: Implement insert() method.
-        return DB::table($this->tableName)->insertGetId($insertData);
+        return DB::table($this->table)->insertGetId($insertData);
     }
 }
