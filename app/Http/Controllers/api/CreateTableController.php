@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\QuestionModel;
 use App\Model\UserModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -21,7 +22,8 @@ class CreateTableController extends Controller
     {
         Log::info("createTable");
         $arr = array(
-            new UserModel()
+            new UserModel(),
+            new QuestionModel()
         );
         $this->create($arr);
 

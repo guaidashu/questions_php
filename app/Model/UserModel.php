@@ -75,9 +75,9 @@ class UserModel extends Model implements BaseModel
      *
      * @return string
      */
-    public function tableName()
+    public function getTableName()
     {
-        // TODO: Implement tableName() method.
+        // TODO: Implement getTableName() method.
         return $this->tableName;
     }
 

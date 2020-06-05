@@ -16,7 +16,7 @@ interface BaseModel
      *
      * @return mixed
      */
-    public function tableName();
+    public function getTableName();
 
     /**
      * 插入数据
