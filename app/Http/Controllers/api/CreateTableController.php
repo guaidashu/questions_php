@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Model\PhysiqueModel;
+use App\Model\PhysiqueModel;
 use App\Model\QuestionModel;
 use App\Model\UserModel;
 use App\Http\Controllers\Controller;

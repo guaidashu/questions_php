@@ -5,9 +5,8 @@
  * Description:
  */
 
-namespace App\Http\Model;
+namespace App\Model;
 
-use App\Model\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
