@@ -28,13 +28,25 @@ class PhysiqueController extends Controller
     {
     }
 
+    /**
+     * 获取所有 体质 数据
+     *
+     * @param Request $request
+     * @return array|false|string
+     */
     public function getPhysiqueList(Request $request)
     {
         // $physiqueModel = new PhysiqueModel();
         $data = PhysiqueModel::all();
-        return successReply("ok");
+        return successReply(pagination($data, count($data)));
     }
 
+    /**
+     * 新增体质数据
+     *
+     * @param Request $request
+     * @return array|false|string
+     */
     public function addPhysique(Request $request)
     {
         $data = $request->post();
