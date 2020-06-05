@@ -21,9 +21,6 @@ class PhysiqueModel extends Model implements BaseModel
      */
     protected $table;
 
-    const CREATED_AT = 'created_at';
-    const UPDATED_AT = 'updated_at';
-
     /**
      * 默认值
      *
@@ -83,6 +80,7 @@ class PhysiqueModel extends Model implements BaseModel
     public function insert($insertData)
     {
         // TODO: Implement insert() method.
+        $insertData["created_at"] = date('Y-m-d h:i:s', time());
         return DB::table($this->table)->insertGetId($insertData);
     }
 }
