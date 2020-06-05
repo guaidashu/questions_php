@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\PhysiqueModel;
 use Illuminate\Http\Request;
 
 /**
@@ -27,8 +28,18 @@ class PhysiqueController extends Controller
     {
     }
 
+    public function getPhysiqueList(Request $request)
+    {
+        // $physiqueModel = new PhysiqueModel();
+        $data = PhysiqueModel::all();
+        return successReply("ok");
+    }
+
     public function addPhysique(Request $request)
     {
-
+        $data = $request->post();
+        $physiqueModel = new PhysiqueModel();
+        $result = $physiqueModel->insert($data);
+        return successReply($result);
     }
 }

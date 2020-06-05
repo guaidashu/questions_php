@@ -14,7 +14,23 @@ use Illuminate\Support\Facades\Schema;
 
 class PhysiqueModel extends Model implements BaseModel
 {
+    /**
+     * 表名
+     *
+     * @var string
+     */
     protected $table;
+
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+    /**
+     * 默认值
+     *
+     * @var array
+     */
+    protected $attributes = [
+    ];
 
     /**
      * 构造函数

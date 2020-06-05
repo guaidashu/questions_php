@@ -23,6 +23,8 @@ Route::prefix('admin')->group(function () {
     Route::get('getData', 'admin\QuestionController@getData');
     Route::post('login', 'admin\UserController@login');
     Route::get('get_info', 'admin\UserController@getInfo');
+    Route::post('add_physique', 'admin\PhysiqueController@addPhysique');
+    Route::post('get_physique_list', 'admin\PhysiqueController@getPhysiqueList');
 });
 
 Route::prefix('api')->group(function () {

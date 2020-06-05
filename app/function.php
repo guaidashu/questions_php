@@ -53,6 +53,21 @@ function errReply($data = "", $code = 1, $msg = "", $encode = false)
     return $arr;
 }
 
+/**
+ * 构造分页
+ *
+ * @param $data
+ * @param $total
+ * @return array
+ */
+function pagination($data, $total)
+{
+    return array(
+        "total" => $total,
+        "data" => $data
+    );
+}
+
 // 邮箱判断函数，检查是否为一个正确的邮箱
 function emailCheck($email)
 {

@@ -17,6 +17,17 @@ class UserModel extends Model implements BaseModel
      */
     protected $table;
 
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+    /**
+     * 默认值
+     *
+     * @var array
+     */
+    protected $attributes = [
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
