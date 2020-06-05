@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Model\PhysiqueModel;
 use App\Model\QuestionModel;
 use App\Model\UserModel;
 use App\Http\Controllers\Controller;
@@ -23,7 +24,8 @@ class CreateTableController extends Controller
         Log::info("createTable");
         $arr = array(
             new UserModel(),
-            new QuestionModel()
+            new QuestionModel(),
+            new PhysiqueModel(),
         );
         $this->create($arr);
 

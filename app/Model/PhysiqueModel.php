@@ -41,7 +41,7 @@ class PhysiqueModel extends Model implements BaseModel
                 $table->id()->comment('唯一主键id');
                 $table->integer('level')->comment('题目显示优先级');
                 $table->string('name')->comment('体质名字');
-                $table->string('')->comment('');
+                $table->string('desc')->comment('体质描述');
             });
         }
     }
