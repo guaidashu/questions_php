@@ -1,13 +1,20 @@
 <?php
+/**
+ * Create by yy(github.com/guaidashu)
+ * Date: 2020/7/3
+ * Description: History Model
+ */
+
 
 namespace App\Model;
 
-use \Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class QuestionModel extends Model implements BaseModel
+class HistoryModel extends Model implements BaseModel
 {
     /**
      * 表名
@@ -34,11 +41,12 @@ class QuestionModel extends Model implements BaseModel
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $this->table = 'question';
+        $this->table = 'history';
     }
 
     /**
      * 初始化表
+     *
      */
     public function initTable()
     {
@@ -46,13 +54,8 @@ class QuestionModel extends Model implements BaseModel
         if (!Schema::hasTable($this->table)) {
             Schema::create($this->table, function (Blueprint $table) {
                 $table->id()->comment('主键id');
-                $table->text('content')->comment('问题内容');
-                $table->unsignedTinyInteger('sex')->comment('性别'); // 这里的性别是检索条件
-                $table->text('answer')->comment('分数序列化json数据'); // 用户要选择的答案
-                $table->unsignedSmallInteger('body_type')->comment('体质类型');
-                $table->smallInteger('level')->comment('显示优先级');
+                $table->bigInteger('user_id')->comment('用户id');
                 $table->smallInteger('status')->comment('软删除标识');
-                // $table->string('')->comment('');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
                 $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
             });

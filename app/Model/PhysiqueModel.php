@@ -54,6 +54,7 @@ class PhysiqueModel extends Model implements BaseModel
                 $table->integer('level')->comment('题目显示优先级');
                 $table->string('name')->comment('体质名字');
                 $table->string('desc')->comment('体质描述');
+                $table->smallInteger('status')->comment('软删除标识');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
                 $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
             });

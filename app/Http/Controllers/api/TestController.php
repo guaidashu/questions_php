@@ -25,4 +25,14 @@ class TestController extends Controller
     {
         return successReply("ok");
     }
+
+    /**
+     * 检测小程序是否连通
+     *
+     * @return array|false|string
+     */
+    public function testMiniProgram()
+    {
+        return successReply(config('app.app_id'));
+    }
 }

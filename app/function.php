@@ -38,7 +38,7 @@ function successReply($data = "", $code = 0, $msg = "", $encode = false)
     return $arr;
 }
 
-function errReply($data = "", $code = 1, $msg = "", $encode = false)
+function errReply($msg = "", $code = 1, $data = "", $encode = false)
 {
     $arr = array(
         "code" => $code,

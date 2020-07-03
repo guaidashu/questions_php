@@ -2,6 +2,16 @@
 
 return [
 
+    /**
+     * 小程序 AppID
+     */
+    'app_id' => env('APP_ID'),
+
+    /**
+     * 小程序 AppSecret
+     */
+    'app_secret' => env('APP_SECRET'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name

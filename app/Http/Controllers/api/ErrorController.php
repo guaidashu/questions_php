@@ -22,6 +22,6 @@ class ErrorController extends Controller
      */
     public function error()
     {
-        return errReply("", 1, "error");
+        return errReply("error");
     }
 }

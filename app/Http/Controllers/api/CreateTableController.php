@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Model\HistoryModel;
 use App\Model\PhysiqueModel;
 use App\Model\QuestionModel;
 use App\Model\UserModel;
@@ -26,6 +27,7 @@ class CreateTableController extends Controller
             new UserModel(),
             new QuestionModel(),
             new PhysiqueModel(),
+            new HistoryModel(),
         );
         $this->create($arr);
 

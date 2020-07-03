@@ -25,11 +25,12 @@ Route::prefix('admin')->group(function () {
     Route::get('get_info', 'admin\UserController@getInfo');
     Route::post('add_physique', 'admin\PhysiqueController@addPhysique');
     Route::get('get_physique_list', 'admin\PhysiqueController@getPhysiqueList');
+    Route::get('init_table', 'api\CreateTableController@createTable');
 });
 
 Route::prefix('api')->group(function () {
-    Route::get('init_table', 'api\CreateTableController@createTable');
     Route::get('test_token', 'api\TestController@testToken')->middleware("check_token");
     Route::get('error', 'api\ErrorController@error')->name("api_error");
+    Route::get('test', 'api\TestController@testMiniProgram');
 });
 
