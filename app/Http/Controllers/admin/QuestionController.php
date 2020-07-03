@@ -3,15 +3,47 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\QuestionModel;
+use Illuminate\Http\Request;
 
+/**
+ * Class QuestionController
+ * @package App\Http\Controllers\admin
+ */
 class QuestionController extends Controller
 {
+    private $questionModel;
+
+    /**
+     * QuestionController constructor.
+     */
     public function __construct()
     {
+        $this->questionModel = new QuestionModel();
     }
 
-    public function getData()
+    /**
+     * @param Request $request
+     * @return array|false|string
+     * 获取问题列表
+     */
+    public function getQuestionList(Request $request)
     {
-        return successReply();
+        $page = $request->query("page", 1);
+        $size = $request->query("size", 10);
+        $questionList = $this->questionModel->getList($page, $size);
+        return successReply($questionList);
+    }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
+     * 添加问题
+     */
+    public function addQuestion(Request $request)
+    {
+        $data = $request->post();
+        $result = $this->questionModel->insert($data);
+        return successReply($result);
     }
 }

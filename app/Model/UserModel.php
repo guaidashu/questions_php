@@ -75,8 +75,9 @@ class UserModel extends Model implements BaseModel
                 $table->string('password')->comment('用户密码');
                 $table->string('remember_token')->comment('记录token');
                 $table->string('open_id')->comment('用户openid');
+                $table->smallInteger("sex")->comment('性别'); // 1是 男性，2是女性
                 $table->string('email')->comment('邮箱');
-                $table->smallInteger('status')->comment('软删除标识');
+                $table->smallInteger('status')->default(1)->comment('软删除标识');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
                 $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
             });

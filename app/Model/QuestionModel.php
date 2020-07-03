@@ -51,8 +51,7 @@ class QuestionModel extends Model implements BaseModel
                 $table->text('answer')->comment('分数序列化json数据'); // 用户要选择的答案
                 $table->unsignedSmallInteger('body_type')->comment('体质类型');
                 $table->smallInteger('level')->comment('显示优先级');
-                $table->smallInteger('status')->comment('软删除标识');
-                // $table->string('')->comment('');
+                $table->smallInteger('status')->default(1)->comment('软删除标识');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
                 $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
             });
@@ -80,5 +79,20 @@ class QuestionModel extends Model implements BaseModel
     {
         // TODO: Implement insert() method.
         return DB::table($this->table)->insertGetId($insertData);
+    }
+
+    /**
+     * @param int $page
+     * @param int $size
+     * @return array
+     *
+     * 获取问题列表
+     */
+    public function getList($page = 1, $size = 10)
+    {
+        $db = DB::table($this->table);
+        $count = $db->count("id");
+        $data = $db->skip(getOffset($page, $size))->take($size)->get();
+        return pagination($data, $count);
     }
 }

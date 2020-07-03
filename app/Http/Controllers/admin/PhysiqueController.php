@@ -19,6 +19,8 @@ use Illuminate\Http\Request;
  */
 class PhysiqueController extends Controller
 {
+    private $physiqueModel;
+
     /**
      * 构造函数
      *
@@ -26,6 +28,7 @@ class PhysiqueController extends Controller
      */
     public function __construct()
     {
+        $this->physiqueModel = new PhysiqueModel();
     }
 
     /**
@@ -50,8 +53,7 @@ class PhysiqueController extends Controller
     public function addPhysique(Request $request)
     {
         $data = $request->post();
-        $physiqueModel = new PhysiqueModel();
-        $result = $physiqueModel->insert($data);
+        $result = $this->physiqueModel->insert($data);
         return successReply($result);
     }
 }

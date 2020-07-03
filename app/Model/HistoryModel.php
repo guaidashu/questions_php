@@ -55,7 +55,7 @@ class HistoryModel extends Model implements BaseModel
             Schema::create($this->table, function (Blueprint $table) {
                 $table->id()->comment('主键id');
                 $table->bigInteger('user_id')->comment('用户id');
-                $table->smallInteger('status')->comment('软删除标识');
+                $table->smallInteger('status')->default(1)->comment('软删除标识');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
                 $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
             });

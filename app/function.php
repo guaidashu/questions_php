@@ -68,6 +68,18 @@ function pagination($data, $total)
     );
 }
 
+/**
+ * @param int $page
+ * @param int $size
+ * @return float|int
+ *
+ * 获取分页要跳过的 位置
+ */
+function getOffset($page = 1, $size = 10)
+{
+    return $size * ($page - 1);
+}
+
 // 邮箱判断函数，检查是否为一个正确的邮箱
 function emailCheck($email)
 {
