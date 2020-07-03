@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Model\QuestionModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class QuestionController
@@ -43,6 +44,10 @@ class QuestionController extends Controller
     public function addQuestion(Request $request)
     {
         $data = $request->post();
+        Log::info($data);
+        $data["content"] = base64_decode($data["content"]);
+        $data["answer"] = json_encode($data["answer"]);
+        $data["created_at"] = date('Y-m-d h:i:s', time());
         $result = $this->questionModel->insert($data);
         return successReply($result);
     }

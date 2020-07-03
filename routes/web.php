@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", 'IndexController@index');
 
 Route::prefix('admin')->group(function () {
-    Route::get('getQuestionList', 'admin\QuestionController@getQuestionList');
+    Route::get('get_question_list', 'admin\QuestionController@getQuestionList');
+    Route::post('add_question', 'admin\QuestionController@addQuestion');
     Route::post('login', 'admin\UserController@login');
     Route::get('get_info', 'admin\UserController@getInfo');
     Route::post('add_physique', 'admin\PhysiqueController@addPhysique');
