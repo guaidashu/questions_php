@@ -39,13 +39,23 @@ class QuestionController extends Controller
     /**
      * @param Request $request
      * @return array|false|string
+     * 获取 所有 问题
+     */
+    public function getAllQuestion(Request $request)
+    {
+        $questionList = $this->questionModel->getAll();
+        return successReply($questionList);
+    }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
      * 添加问题
      */
     public function addQuestion(Request $request)
     {
         $data = $request->post();
-        Log::info($data);
-        $data["content"] = base64_decode($data["content"]);
+        // $data["content"] = base64_decode($data["content"]);
         $data["answer"] = json_encode($data["answer"]);
         $data["created_at"] = date('Y-m-d h:i:s', time());
         $result = $this->questionModel->insert($data);

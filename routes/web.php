@@ -33,5 +33,6 @@ Route::prefix('api')->group(function () {
     Route::get('test_token', 'api\TestController@testToken')->middleware("check_token");
     Route::get('error', 'api\ErrorController@error')->name("api_error");
     Route::get('test', 'api\TestController@testMiniProgram');
+    Route::get('get_question_list', 'admin\QuestionController@getAllQuestion');
 });
 

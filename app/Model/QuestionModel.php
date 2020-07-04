@@ -3,9 +3,16 @@
 namespace App\Model;
 
 use \Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+
+const SEX = [
+    '男',
+    '女',
+    '不限'
+];
 
 class QuestionModel extends Model implements BaseModel
 {
@@ -25,6 +32,7 @@ class QuestionModel extends Model implements BaseModel
      * @var array
      */
     protected $attributes = [
+
     ];
 
     /**
@@ -70,6 +78,38 @@ class QuestionModel extends Model implements BaseModel
     }
 
     /**
+     * @param $value
+     * @return mixed
+     *
+     * 获取 性别的数据处理
+     */
+    public function getSexAttribute($value)
+    {
+        return SEX[$value - 1];
+    }
+
+    /**
+     * @param $value
+     *
+     * 获取 答案数据，其实就是decode一下
+     * @return mixed
+     */
+    public function getAnswerAttribute($value)
+    {
+        return json_decode($value);
+    }
+
+    /**
+     * @return HasOne
+     *
+     * 体质关联的数据
+     */
+    public function physique()
+    {
+        return $this->hasOne(PhysiqueModel::class, 'id', 'body_type');
+    }
+
+    /**
      * 插入数据
      *
      * @param $insertData
@@ -90,9 +130,19 @@ class QuestionModel extends Model implements BaseModel
      */
     public function getList($page = 1, $size = 10)
     {
-        $db = DB::table($this->table);
+        // $db = DB::table($this->table);
+        $db = QuestionModel::with('physique')->where("status", '=', 1);
         $count = $db->count("id");
         $data = $db->skip(getOffset($page, $size))->take($size)->get();
         return pagination($data, $count);
+    }
+
+    /**
+     * @return mixed
+     *
+     * 获取所有
+     */
+    public function getAll() {
+        return QuestionModel::with('physique')->get();
     }
 }
