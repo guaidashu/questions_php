@@ -12,7 +12,9 @@ class UserController
 
     public function login()
     {
-        return successReply("ok");
+        return successReply(array(
+            "token" => "jyr"
+        ));
     }
 
     public function getInfo()
