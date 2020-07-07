@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         "http://127.0.0.1/*",
         "http://admin.questions_php.com/*",
+        "http://admin.ijinyaner.com/*",
     ];
 }
