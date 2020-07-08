@@ -26,6 +26,7 @@ class QuestionController extends Controller
     /**
      * @param Request $request
      * @return array|false|string
+     *
      * 获取问题列表
      */
     public function getQuestionList(Request $request)
@@ -39,6 +40,7 @@ class QuestionController extends Controller
     /**
      * @param Request $request
      * @return array|false|string
+     *
      * 获取 所有 问题
      */
     public function getAllQuestion(Request $request)
@@ -50,15 +52,48 @@ class QuestionController extends Controller
     /**
      * @param Request $request
      * @return array|false|string
+     *
      * 添加问题
      */
     public function addQuestion(Request $request)
     {
         $data = $request->post();
-        // $data["content"] = base64_decode($data["content"]);
-        $data["answer"] = json_encode($data["answer"]);
-        $data["created_at"] = date('Y-m-d h:i:s', time());
+        // $data["created_at"] = date('Y-m-d h:i:s', time());
         $result = $this->questionModel->insert($data);
+        return successReply($result);
+    }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
+     *
+     * 更新问题数据
+     */
+    public function updateQuestion(Request $request)
+    {
+        $data = $request->post();
+        $model = $this->questionModel->queryData()->find($data['id']);
+        $model->sex = $data['sex'];
+        $model->content = $data['content'];
+        $model->level = $data['level'];
+        $model->answer = $data['answer'];
+        $model->body_type = $data['body_type'];
+        $result = $model->save();
+        return successReply($result);
+    }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
+     * @throws \Exception
+     *
+     * 删除数据
+     */
+    public function deleteQuestion(Request $request)
+    {
+        Log::info("delete success request");
+        $id = $request->query("id");
+        $result = $this->questionModel->deleteQuestion($id);
         return successReply($result);
     }
 }

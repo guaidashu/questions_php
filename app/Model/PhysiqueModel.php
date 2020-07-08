@@ -7,6 +7,7 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -70,6 +71,15 @@ class PhysiqueModel extends Model implements BaseModel
     {
         // TODO: Implement getTableName() method.
         return $this->table;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function queryData()
+    {
+        // TODO: Implement getDB() method.
+        return PhysiqueModel::on()->where("status", "=", 1);
     }
 
     /**

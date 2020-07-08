@@ -9,6 +9,7 @@
 namespace App\Model;
 
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
@@ -71,6 +72,15 @@ class HistoryModel extends Model implements BaseModel
     {
         // TODO: Implement getTableName() method.
         return $this->table;
+    }
+
+    /**
+     * @return Builder
+     */
+    public function queryData()
+    {
+        // TODO: Implement getDB() method.
+        return HistoryModel::on()->where("status", "=", 1);
     }
 
     /**

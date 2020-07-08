@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use \Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Schema\Blueprint;
@@ -33,6 +34,10 @@ class QuestionModel extends Model implements BaseModel
      */
     protected $attributes = [
 
+    ];
+
+    protected $appends = [
+        'sex_cn'
     ];
 
     /**
@@ -78,14 +83,22 @@ class QuestionModel extends Model implements BaseModel
     }
 
     /**
-     * @param $value
-     * @return mixed
+     * @return Builder
+     */
+    public function queryData()
+    {
+        // TODO: Implement getDB() method.
+        return QuestionModel::on()->where("status", "=", 1);
+    }
+
+    /**
+     * @return string
      *
      * 获取 性别的数据处理
      */
-    public function getSexAttribute($value)
+    public function getSexCnAttribute()
     {
-        return SEX[$value - 1];
+        return SEX[$this->sex - 1];
     }
 
     /**
@@ -97,6 +110,28 @@ class QuestionModel extends Model implements BaseModel
     public function getAnswerAttribute($value)
     {
         return json_decode($value);
+    }
+
+    /**
+     * @param $value
+     * @return false|string
+     *
+     * answer数据的 json 序列化
+     */
+    public function setAnswerAttribute($value)
+    {
+        return json_encode($value);
+    }
+
+    /**
+     * @param $value
+     * @return false|string
+     *
+     * 创建日期 数据赋值
+     */
+    public function setCreatedAtAttribute($value)
+    {
+        return date('Y-m-d h:i:s', time());
     }
 
     /**
@@ -131,7 +166,7 @@ class QuestionModel extends Model implements BaseModel
     public function getList($page = 1, $size = 10)
     {
         // $db = DB::table($this->table);
-        $db = QuestionModel::with('physique')->where("status", '=', 1);
+        $db = $this->queryData()->with('physique');
         $count = $db->count("id");
         $data = $db->skip(getOffset($page, $size))->take($size)->get();
         return pagination($data, $count);
@@ -142,7 +177,21 @@ class QuestionModel extends Model implements BaseModel
      *
      * 获取所有
      */
-    public function getAll() {
-        return QuestionModel::with('physique')->get();
+    public function getAll()
+    {
+        return QuestionModel::with('physique')->where("status", "=", 1)->get();
+    }
+
+    /**
+     * @param $id
+     * @return bool|null
+     *
+     * 删除数据
+     */
+    public function deleteQuestion($id)
+    {
+        $data = $this->queryData()->find($id);
+        $data->status = 0;
+        return $data->save();
     }
 }

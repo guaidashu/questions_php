@@ -22,6 +22,8 @@ Route::get("/", 'IndexController@index');
 Route::prefix('admin')->group(function () {
     Route::get('get_question_list', 'admin\QuestionController@getQuestionList');
     Route::post('add_question', 'admin\QuestionController@addQuestion');
+    Route::put('update_question', 'admin\QuestionController@updateQuestion');
+    Route::delete('delete_question', 'admin\QuestionController@deleteQuestion');
     Route::post('login', 'admin\UserController@login');
     Route::get('get_info', 'admin\UserController@getInfo');
     Route::post('add_physique', 'admin\PhysiqueController@addPhysique');

@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Builder;
+
 interface BaseModel
 {
     /**
@@ -25,4 +27,9 @@ interface BaseModel
      * @return mixed
      */
     public function insert($insertData);
+
+    /**
+     * @return Builder
+     */
+    public function queryData();
 }
