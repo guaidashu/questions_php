@@ -41,18 +41,6 @@ class QuestionController extends Controller
      * @param Request $request
      * @return array|false|string
      *
-     * 获取 所有 问题
-     */
-    public function getAllQuestion(Request $request)
-    {
-        $questionList = $this->questionModel->getAll();
-        return successReply($questionList);
-    }
-
-    /**
-     * @param Request $request
-     * @return array|false|string
-     *
      * 添加问题
      */
     public function addQuestion(Request $request)
