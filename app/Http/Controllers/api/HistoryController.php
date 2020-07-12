@@ -43,7 +43,8 @@ class HistoryController extends Controller
      */
     public function submitResult(Request $request)
     {
-        Log::info($request->post());
+        $data = $request->post();
+        $this->historyModel->insert($data);
         return successReply("ok");
     }
 }
