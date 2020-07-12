@@ -116,4 +116,15 @@ class UserModel extends Model implements BaseModel
         // TODO: Implement insert() method.
         return DB::table($this->table)->insertGetId($insertData);
     }
+
+    /**
+     * @param $open_id
+     * @return Builder|Model|object|null
+     *
+     * 根据 openid 获取数据
+     */
+    public function getUserByOpenId($open_id)
+    {
+        return $this->queryData()->where("open_id", "=", $open_id)->first();
+    }
 }
