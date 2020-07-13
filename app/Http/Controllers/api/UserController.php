@@ -42,11 +42,18 @@ class UserController extends Controller
 
         $result = json_encode($data);
 
-        if (empty($request["openid"])) {
+        if (empty($result["openid"])) {
             return errReply("empty open_id");
         }
 
         $user = $this->userModel->getUserByOpenId($result["openid"]);
+
+        if (empty($user->id)) {
+            // 创建新用户
+            $this->userModel->insert(array(
+               "open_id" => $result["openid"]
+            ));
+        }
 
         return successReply($data);
     }

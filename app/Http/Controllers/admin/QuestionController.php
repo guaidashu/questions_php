@@ -46,7 +46,8 @@ class QuestionController extends Controller
     public function addQuestion(Request $request)
     {
         $data = $request->post();
-        // $data["created_at"] = date('Y-m-d h:i:s', time());
+        $data["created_at"] = date('Y-m-d h:i:s', time());
+        $data["answer"] = json_encode($data["answer"]);
         $result = $this->questionModel->insert($data);
         return successReply($result);
     }

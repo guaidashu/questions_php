@@ -153,7 +153,7 @@ class QuestionModel extends Model implements BaseModel
     public function insert($insertData)
     {
         // TODO: Implement insert() method.
-        return DB::table($this->table)->insertGetId($insertData);
+        return QuestionModel::on()->insert($insertData);
     }
 
     /**
