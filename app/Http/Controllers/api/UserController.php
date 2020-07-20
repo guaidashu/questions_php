@@ -37,24 +37,38 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $code = $request->query('code');
-        $url = "https://api.weixin.qq.com/sns/jscode2session?appid=".config('app.app_id')."&secret=".config('app.app_secret')."&js_code=".$code."&grant_type=authorization_code";
+        $user_info = $request->query('user_info');
+
+        $url = "https://api.weixin.qq.com/sns/jscode2session?appid=" . config('app.app_id') . "&secret=" . config('app.app_secret') . "&js_code=" . $code . "&grant_type=authorization_code";
         $data = getInfo($url);
 
-        $result = json_encode($data);
+        $result = json_decode($data);
+        $userInfo = json_decode($user_info);
 
-        if (empty($result["openid"])) {
-            return errReply("empty open_id");
+        if (empty($result->openid)) {
+            return errReply("empty open_id, msg: " . json_encode($result));
         }
 
-        $user = $this->userModel->getUserByOpenId($result["openid"]);
+        $user = $this->userModel->getUserByOpenId($result->openid);
+
+        $result->user_id = 0;
 
         if (empty($user->id)) {
             // 创建新用户
-            $this->userModel->insert(array(
-               "open_id" => $result["openid"]
+            $result->user_id = $this->userModel->insert(array(
+                "open_id" => $result->openid,
+                "username" => $userInfo->nickName,
+                "city" => $userInfo->city,
+                "country" => $userInfo->country,
+                "sex" => $userInfo->gender,
+                "language" => $userInfo->language,
+                "province" => $userInfo->province,
+                "avatar_url" => $userInfo->avatarUrl
             ));
+        } else {
+            $result->user_id = $user->id;
         }
 
-        return successReply($data);
+        return successReply($result);
     }
 }

@@ -44,7 +44,28 @@ class HistoryController extends Controller
     public function submitResult(Request $request)
     {
         $data = $request->post();
-        $this->historyModel->insert($data);
-        return successReply("ok");
+        $data["answer"] = json_encode($data["answer"]);
+        $data["result"] = json_encode($data["result"]);
+        $data["created_at"] = date('Y/m/d h:i:s', time());
+        $insert_id = $this->historyModel->insert($data);
+        return successReply($insert_id);
+    }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
+     *
+     * 通过id 获取对应的 答题历史记录
+     */
+    public function getHistoryResult(Request $request)
+    {
+        $id = $request->query('id');
+        $data = $this->historyModel->getHistoryById($id);
+
+        if (empty($data->id)) {
+            return errReply("数据获取出错");
+        }
+
+        return successReply($data);
     }
 }

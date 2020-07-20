@@ -58,6 +58,9 @@ class HistoryModel extends Model implements BaseModel
                 $table->bigInteger('user_id')->comment('用户id');
                 $table->longText('answer')->comment('用户的答案');
                 $table->longText('result')->comment('用户得分');
+                $table->text('physique_type')->nullable()->comment('体质类型');
+                $table->text('physique_type_both')->nullable()->comment('兼有类型');
+                $table->text('physique_type_trend')->nullable()->comment('倾向类型');
                 $table->smallInteger('status')->default(1)->comment('软删除标识');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
                 $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
@@ -132,6 +135,11 @@ class HistoryModel extends Model implements BaseModel
         return date('Y/m/d h:i:s', time());
     }
 
+    public function getCreatedAtAttribute($value)
+    {
+        return date('Y/m/d h:i', strtotime($value));
+    }
+
     /**
      * 插入数据
      *
@@ -142,5 +150,16 @@ class HistoryModel extends Model implements BaseModel
     {
         // TODO: Implement insert() method.
         return DB::table($this->table)->insertGetId($insertData);
+    }
+
+    /**
+     * @param $id
+     * @return Builder|Model|object|null
+     *
+     * 通过id 获取 对应的记录
+     */
+    public function getHistoryById($id)
+    {
+        return $this->queryData()->where("id", "=", $id)->first();
     }
 }

@@ -37,6 +37,7 @@ Route::prefix('api')->group(function () {
     Route::get('test', 'api\TestController@testMiniProgram');
     Route::get('get_question_list', 'api\QuestionController@getAllQuestion');
     Route::post('submit_result', 'api\HistoryController@submitResult');
+    Route::get('get_history_result', 'api\HistoryController@getHistoryResult');
     Route::get('login', 'api\UserController@login');
 });
 

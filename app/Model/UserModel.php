@@ -73,11 +73,16 @@ class UserModel extends Model implements BaseModel
             Schema::create('user', function (Blueprint $table) {
                 $table->id()->comment('主键, 唯一id');
                 $table->string('username')->comment('用户名');;
-                $table->string('password')->comment('用户密码');
-                $table->string('remember_token')->comment('记录token');
+                $table->string('password')->nullable()->comment('用户密码');
+                $table->string('remember_token')->nullable()->comment('记录token');
                 $table->string('open_id')->comment('用户openid');
-                $table->smallInteger("sex")->comment('性别'); // 1是 男性，2是女性
-                $table->string('email')->comment('邮箱');
+                $table->string('avatar_url')->nullable()->comment('头像url');
+                $table->string('country')->nullable()->comment('国家');
+                $table->string('province')->nullable()->comment('省');
+                $table->string('city')->nullable()->comment('城市');
+                $table->string('language')->nullable()->comment('语言');
+                $table->smallInteger("sex")->default(3)->comment('性别'); // 1是 男性，2是女性
+                $table->string('email')->nullable()->comment('邮箱');
                 $table->smallInteger('status')->default(1)->comment('软删除标识');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
                 $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');
