@@ -129,9 +129,9 @@ class QuestionModel extends Model implements BaseModel
      *
      * 创建日期 数据赋值
      */
-    public function setCreatedAtAttribute($value)
+    public function getCreatedAtAttribute($value)
     {
-        return date('Y-m-d h:i:s', time());
+        return date('Y/m/d h:i:s', time());
     }
 
     /**

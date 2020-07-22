@@ -162,4 +162,15 @@ class HistoryModel extends Model implements BaseModel
     {
         return $this->queryData()->where("id", "=", $id)->first();
     }
+
+    /**
+     * @param $user_id
+     * @return \Illuminate\Database\Eloquent\Collection
+     *
+     * 通过user_id 获取答题历史记录
+     */
+    public function getHistoryByUserId($user_id)
+    {
+        return $this->queryData()->where("user_id", "=", $user_id)->get();
+    }
 }

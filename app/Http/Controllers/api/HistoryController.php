@@ -68,4 +68,13 @@ class HistoryController extends Controller
 
         return successReply($data);
     }
+
+    public function getHistoryListByUserId(Request $request)
+    {
+        $user_id = $request->query('user_id');
+
+        $data = $this->historyModel->getHistoryByUserId($user_id);
+
+        return successReply($data);
+    }
 }
