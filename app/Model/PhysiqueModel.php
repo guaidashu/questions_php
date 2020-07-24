@@ -94,4 +94,16 @@ class PhysiqueModel extends Model implements BaseModel
         $insertData["created_at"] = date('Y-m-d h:i:s', time());
         return DB::table($this->table)->insertGetId($insertData);
     }
+
+    /**
+     * @param $delete_id
+     *
+     * 软删除 体质类型
+     */
+    public function deletePhysique($delete_id)
+    {
+        $model = $this->queryData()->find($delete_id);
+        $model->status = 0;
+        $model->save();
+    }
 }

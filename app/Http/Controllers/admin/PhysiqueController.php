@@ -56,4 +56,17 @@ class PhysiqueController extends Controller
         $result = $this->physiqueModel->insert($data);
         return successReply($result);
     }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
+     *
+     * 删除 体质类型
+     */
+    public function deletePhysique(Request $request)
+    {
+        $delete_id = $request->query('delete_id');
+        $result = $this->physiqueModel->deletePhysique($delete_id);
+        return successReply($result);
+    }
 }

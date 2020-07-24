@@ -29,6 +29,7 @@ Route::prefix('admin')->group(function () {
     Route::post('add_physique', 'admin\PhysiqueController@addPhysique');
     Route::get('get_physique_list', 'admin\PhysiqueController@getPhysiqueList');
     Route::get('init_table', 'api\CreateTableController@createTable');
+    Route::delete('delete_physique', 'admin\PhysiqueController@deletePhysique');
 });
 
 Route::prefix('api')->group(function () {
