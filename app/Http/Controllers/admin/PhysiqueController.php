@@ -81,6 +81,12 @@ class PhysiqueController extends Controller
     {
         $data = $request->post();
 
-        return successReply(1);
+        $model = $this->physiqueModel->queryData()->find($data["id"]);
+
+        $model->level = $data["level"];
+        $model->name = $data["name"];
+        $model->desc = $data["desc"];
+
+        return successReply($model->save());
     }
 }
