@@ -80,7 +80,6 @@ class QuestionController extends Controller
      */
     public function deleteQuestion(Request $request)
     {
-        Log::info("delete success request");
         $id = $request->query("id");
         $result = $this->questionModel->deleteQuestion($id);
         return successReply($result);

@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\PhysiqueModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * 体质 控制器
@@ -40,7 +41,7 @@ class PhysiqueController extends Controller
     public function getPhysiqueList(Request $request)
     {
         // $physiqueModel = new PhysiqueModel();
-        $data = PhysiqueModel::all();
+        $data = $this->physiqueModel->getAllData();
         return successReply(pagination($data, count($data)));
     }
 
@@ -65,8 +66,21 @@ class PhysiqueController extends Controller
      */
     public function deletePhysique(Request $request)
     {
-        $delete_id = $request->query('delete_id');
-        $result = $this->physiqueModel->deletePhysique($delete_id);
+        $id = $request->query("id");
+        $result = $this->physiqueModel->deletePhysique($id);
         return successReply($result);
+    }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
+     *
+     * 更新成功
+     */
+    public function updatePhysique(Request $request)
+    {
+        $data = $request->post();
+
+        return successReply(1);
     }
 }

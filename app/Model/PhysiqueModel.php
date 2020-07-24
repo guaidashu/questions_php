@@ -96,14 +96,25 @@ class PhysiqueModel extends Model implements BaseModel
     }
 
     /**
-     * @param $delete_id
+     * @return Builder[]|\Illuminate\Database\Eloquent\Collection
+     *
+     * 获取所有数据
+     */
+    public function getAllData()
+    {
+        return $this->queryData()->get();
+    }
+
+    /**
+     * @param $id
+     * @return bool
      *
      * 软删除 体质类型
      */
-    public function deletePhysique($delete_id)
+    public function deletePhysique($id)
     {
-        $model = $this->queryData()->find($delete_id);
-        $model->status = 0;
-        $model->save();
+        $data = $this->queryData()->where("id", "=", $id)->first();
+        $data->status = 0;
+        return $data->save();
     }
 }
