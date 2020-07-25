@@ -5,14 +5,13 @@
  * Description:
  */
 
-
 namespace App\Http\Controllers\api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Decrypt\WXBizDataCrypt;
 use App\Model\UserModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -68,6 +67,33 @@ class UserController extends Controller
         } else {
             $result->user_id = $user->id;
         }
+
+        return successReply($result);
+    }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
+     *
+     * 解密 手机号码 并 存到对应用户信息
+     */
+    public function decryptPhoneNumber(Request $request)
+    {
+        $data = $request->post();
+
+        $result = '';
+
+        $encrypt = new WXBizDataCrypt(config('app.app_id'), $data["session_key"]);
+
+        $encrypt->decryptData($data["encryptedData"], $data["iv"], $result);
+
+        $result = json_decode($result);
+
+        $user = $this->userModel->queryData()->find($data["user_id"]);
+
+        $user->phone_number = $result->phone_number;
+
+        $user->save();
 
         return successReply($result);
     }

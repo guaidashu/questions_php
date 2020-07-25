@@ -41,5 +41,6 @@ Route::prefix('api')->group(function () {
     Route::get('get_history_result', 'api\HistoryController@getHistoryResult');
     Route::get('get_history_list_by_user_id', 'api\HistoryController@getHistoryListByUserId');
     Route::get('login', 'api\UserController@login');
+    Route::post('decrypt_phone_number', 'api\UserController@decryptPhoneNumber');
 });
 

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 use \Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 const SEX = [
@@ -165,7 +164,6 @@ class QuestionModel extends Model implements BaseModel
      */
     public function getList($page = 1, $size = 10)
     {
-        // $db = DB::table($this->table);
         $db = $this->queryData()->with('physique');
         $count = $db->count("id");
         $data = $db->skip(getOffset($page, $size))->take($size)->get();

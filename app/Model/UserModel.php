@@ -70,7 +70,7 @@ class UserModel extends Model implements BaseModel
         // TODO: Implement initTable() method.
         // 判断表是否存在
         if (!Schema::hasTable($this->table)) {
-            Schema::create('user', function (Blueprint $table) {
+            Schema::create($this->table, function (Blueprint $table) {
                 $table->id()->comment('主键, 唯一id');
                 $table->string('username')->comment('用户名');;
                 $table->string('password')->nullable()->comment('用户密码');
@@ -82,6 +82,7 @@ class UserModel extends Model implements BaseModel
                 $table->string('city')->nullable()->comment('城市');
                 $table->string('language')->nullable()->comment('语言');
                 $table->smallInteger("sex")->default(3)->comment('性别'); // 1是 男性，2是女性
+                $table->string('phone_number')->nullable()->comment('手机号码');
                 $table->string('email')->nullable()->comment('邮箱');
                 $table->smallInteger('status')->default(1)->comment('软删除标识');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');

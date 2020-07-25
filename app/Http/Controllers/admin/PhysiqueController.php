@@ -40,7 +40,6 @@ class PhysiqueController extends Controller
      */
     public function getPhysiqueList(Request $request)
     {
-        // $physiqueModel = new PhysiqueModel();
         $data = $this->physiqueModel->getAllData();
         return successReply(pagination($data, count($data)));
     }

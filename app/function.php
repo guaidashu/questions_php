@@ -23,6 +23,13 @@ function debug($arr, $exit = false)
 
 // 将内容转化为json变量并返回 ，参数content为主要内容，id为数据库操作返回id，用时可加
 // reply为评论回复id ，用时可加，另外id和reply可酌情使用，看情况
+/**
+ * @param string $data
+ * @param int $code
+ * @param string $msg
+ * @param bool $encode
+ * @return array|false|string
+ */
 function successReply($data = "", $code = 0, $msg = "", $encode = false)
 {
     $arr = array(
