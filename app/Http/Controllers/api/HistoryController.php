@@ -44,6 +44,87 @@ class HistoryController extends Controller
     public function submitResult(Request $request)
     {
         $data = $request->post();
+
+        $N = 0;
+        $phzScore = 0;
+
+        $data["physique_type"] = array();
+        $data["physique_type_both"] = array();
+        $data["physique_type_trend"] = array();
+
+        // 进行体制 评判
+        // 获取最大值
+        $max = $data["result"][0]["score"];
+
+        // 遍历分数值 取得最大分数
+        foreach ($data["result"] as $k => $v) {
+
+            if ($v["score"] >= 40) {
+                $N++;
+            }
+
+            if ($v["physique_name"] == "平和体质") {
+                $phzScore = $v["score"];
+                continue;
+            }
+
+            if ($v["score"] > $max) {
+                $max = $v["score"];
+            }
+        }
+
+        // 取得第二高的分数
+        $second = 0;
+        foreach ($data["result"] as $k => $v) {
+
+            if ($v["physique_name"] == "平和体质") {
+                continue;
+            }
+
+            if ($v["score"] < $max && $v["score"] > $second) {
+                $second = $v["score"];
+            }
+        }
+
+        // 判断主体质类型
+        if ($phzScore >= 60 && $max < 30) {
+            $data["physique_type"][] = "平和质";
+        } else if ($phzScore >= 60 && $max >= 30 && $max <= 39) {
+            // 基本是平和体质
+            $data["physique_type"] = "基本是平和质";
+            foreach ($data["result"] as $k => $v) {
+                if ($max == $v["score"]) {
+                    $data["physique_type_trend"][] = $v["physique_name"];
+                }
+            }
+        } else {
+            // 应该判断多个主体质类型
+            if ($max >= 40) {
+                foreach ($data["result"] as $k => $v) {
+                    if ($v["score"] == $max) {
+                        $data["physique_type"][] = $v["physique_name"];
+                    }
+                }
+            }
+
+            // 判断X 是否大于等于 2 且 <= N
+            if (count($data["physique_type"]) < $N && count($data["physique_type"]) >= 2) {
+                // 只有主体质类型要显示
+            } else {
+                // 否则 进行其他逻辑
+                if ($second >= 40) {
+                    foreach ($data["result"] as $k => $v) {
+                        if ($v["score"] == $second) {
+                            $data["physique_type_both"][] = $v["physique_name"];
+                        }
+                    }
+                }
+            }
+        }
+
+        $data["physique_type"] = json_encode($data["physique_type"]);
+        $data["physique_type_both"] = json_encode($data["physique_type_both"]);
+        $data["physique_type_trend"] = json_encode($data["physique_type_trend"]);
         $data["answer"] = json_encode($data["answer"]);
         $data["result"] = json_encode($data["result"]);
         $data["created_at"] = date('Y/m/d h:i:s', time());
