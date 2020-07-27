@@ -12,7 +12,6 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Model\HistoryModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class HistoryController

@@ -141,6 +141,36 @@ class HistoryModel extends Model implements BaseModel
     }
 
     /**
+     * @param $value
+     * @return mixed
+     *
+     * 体质类型
+     */
+    public function getPhysiqueTypeAttribute($value) {
+        return json_decode($value);
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     *
+     * 兼有体质类型
+     */
+    public function getPhysiqueTypeBothAttribute($value) {
+        return json_decode($value);
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     *
+     * 倾向体质类型
+     */
+    public function getPhysiqueTypeTrendAttribute($value) {
+        return json_decode($value);
+    }
+
+    /**
      * 插入数据
      *
      * @param $insertData
@@ -173,4 +203,5 @@ class HistoryModel extends Model implements BaseModel
     {
         return $this->queryData()->where("user_id", "=", $user_id)->get();
     }
+
 }
