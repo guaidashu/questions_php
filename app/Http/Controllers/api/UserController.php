@@ -9,7 +9,7 @@ namespace App\Http\Controllers\api;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Decrypt\WXBizDataCrypt;
+use App\Http\Controllers\decrypt\WXBizDataCrypt;
 use App\Model\UserModel;
 use Illuminate\Http\Request;
 
