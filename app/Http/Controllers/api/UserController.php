@@ -10,6 +10,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Model\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -93,7 +94,7 @@ class UserController extends Controller
 
         $result = '';
 
-        $this->appid = config(config('app.app_id'));
+        $this->appid = config('app.app_id');
         $this->sessionKey = $data["session_key"];
 
         // $encrypt = new WXBizDataCrypt(config('app.app_id'), );
