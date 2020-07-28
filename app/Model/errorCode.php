@@ -11,7 +11,7 @@
  * </ul>
  */
 
-namespace App\Http\Controllers\api;
+namespace App\Model;
 
 class ErrorCode
 {

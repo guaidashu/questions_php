@@ -10,6 +10,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Model\UserModel;
+use App\Model\WXBizDataCrypt;
 use Illuminate\Http\Request;
 
 class UserController extends Controller

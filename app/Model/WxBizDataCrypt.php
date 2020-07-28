@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 1998-2014 Tencent Inc.
  */
 
-namespace App\Http\Controllers\api;
+namespace App\Model;
 
 class WXBizDataCrypt
 {
