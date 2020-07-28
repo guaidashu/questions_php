@@ -11,7 +11,7 @@
  * </ul>
  */
 
-namespace App\Http\Controllers\Decrypt;
+namespace App\Http\Controllers\decrypt;
 
 class ErrorCode
 {
