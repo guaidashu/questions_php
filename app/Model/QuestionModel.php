@@ -63,6 +63,9 @@ class QuestionModel extends Model implements BaseModel
                 $table->text('answer')->comment('分数序列化json数据'); // 用户要选择的答案
                 $table->unsignedSmallInteger('body_type')->comment('体质类型');
                 $table->smallInteger('level')->comment('显示优先级');
+                $table->smallInteger('repeat')->nullable()->comment('是否重复'); // 1 为不重复，2为重复，默认为1
+                $table->smallInteger('is_show')->nullable()->comment('是否显示此问题'); // 1为显示，2为不显示 默认为1
+                $table->bigInteger('repeat_id')->nullable()->comment('绑定的重复id');
                 $table->smallInteger('status')->default(1)->comment('软删除标识');
                 $table->timestamp('created_at', 0)->nullable()->comment('创建时间');
                 $table->timestamp('updated_at', 0)->nullable()->comment('更新时间');

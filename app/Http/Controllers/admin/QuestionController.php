@@ -66,6 +66,9 @@ class QuestionController extends Controller
         $model->level = $data['level'];
         $model->answer = $data['answer'];
         $model->body_type = $data['body_type'];
+        $model->repeat = $data["repeat"];
+        $model->repeat_id = $data["repeat_id"];
+        $model->is_show = $data["is_show"];
         $result = $model->save();
         return successReply($result);
     }

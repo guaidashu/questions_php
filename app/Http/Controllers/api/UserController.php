@@ -62,7 +62,8 @@ class UserController extends Controller
                 "sex" => $userInfo->gender,
                 "language" => $userInfo->language,
                 "province" => $userInfo->province,
-                "avatar_url" => $userInfo->avatarUrl
+                "avatar_url" => $userInfo->avatarUrl,
+                "created_at" => date('Y-m-d h:i:s', time())
             ));
         } else {
             $result->user_id = $user->id;
@@ -91,7 +92,7 @@ class UserController extends Controller
 
         $user = $this->userModel->queryData()->find($data["user_id"]);
 
-        $user->phone_number = $result->phone_number;
+        $user->phone_number = $result->phoneNumber;
 
         $user->save();
 
