@@ -82,6 +82,15 @@ class UserController extends Controller
     {
         $data = $request->post();
 
+        $user = $this->userModel->queryData()->find($data["user_id"]);
+
+        // 判断用户是否 已经有电话号码，已经存在则直接返回即可
+        if (!empty($user->phone_number)) {
+            return successReply(array(
+                "purePhoneNumber" => $user->phone_number
+            ));
+        }
+
         $result = '';
 
         $encrypt = new WXBizDataCrypt(config('app.app_id'), $data["session_key"]);
@@ -90,12 +99,12 @@ class UserController extends Controller
 
         $result = json_decode($result);
 
-        $user = $this->userModel->queryData()->find($data["user_id"]);
-
-        $user->phone_number = $result->phoneNumber;
-
-        $user->save();
-
-        return successReply($result);
+        if (!empty($result->phoneNumber)) {
+            $user->phone_number = $result->phoneNumber;
+            $user->save();
+            return successReply($result);
+        } else {
+            return errReply("手机号获取出错");
+        }
     }
 }
