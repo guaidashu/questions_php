@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+date_default_timezone_set('Asia/Shanghai');
+
 const SEX = [
     '男',
     '女',

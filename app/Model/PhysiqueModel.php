@@ -13,6 +13,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
+date_default_timezone_set('Asia/Shanghai');
+
 class PhysiqueModel extends Model implements BaseModel
 {
     /**

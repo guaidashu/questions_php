@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller;
 use App\Model\HistoryModel;
 use Illuminate\Http\Request;
 
+date_default_timezone_set('Asia/Shanghai');
+
 /**
  * Class HistoryController
  * @package App\Http\Controllers\api

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Model\QuestionModel;
 use Illuminate\Http\Request;
 
+date_default_timezone_set('Asia/Shanghai');
+
 /**
  * Class QuestionController
  * @package App\Http\Controllers\admin
