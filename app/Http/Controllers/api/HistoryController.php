@@ -111,6 +111,10 @@ class HistoryController extends Controller
             // 应该判断多个主体质类型
             if ($max >= 40) {
                 foreach ($data["result"] as $k => $v) {
+                    if ($v["physique_name"] == "平和体质") {
+                        continue;
+                    }
+
                     if ($v["score"] == $max) {
                         $data["physique_type"][] = array(
                             "name" => $v["physique_name"],
@@ -127,6 +131,10 @@ class HistoryController extends Controller
                 // 否则 进行其他逻辑
                 if ($second >= 40) {
                     foreach ($data["result"] as $k => $v) {
+                        if ($v["physique_name"] == "平和体质") {
+                            continue;
+                        }
+
                         if ($v["score"] == $second) {
                             $data["physique_type_both"][] = array(
                                 "name" => $v["physique_name"],
