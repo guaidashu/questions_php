@@ -153,6 +153,10 @@ class HistoryController extends Controller
         $data["physique_type_trend"] = json_encode($data["physique_type_trend"]);
         $data["answer"] = json_encode($data["answer"]);
         $data["result"] = json_encode($data["result"]);
+        $data["height"] = $data["info"]["height"];
+        $data["weight"] = $data["info"]["weight"];
+        $data["age"] = $data["info"]["age"];
+        $data["career"] = $data["info"]["career"];
         $data["created_at"] = date('Y/m/d h:i:s', time());
         $insert_id = $this->historyModel->insert($data);
         return successReply($insert_id);
