@@ -158,6 +158,7 @@ class HistoryController extends Controller
         $data["age"] = $data["info"]["age"];
         $data["career"] = $data["info"]["career"];
         $data["created_at"] = date('Y/m/d h:i:s', time());
+        unset($data["info"]);
         $insert_id = $this->historyModel->insert($data);
         return successReply($insert_id);
     }
