@@ -66,8 +66,10 @@ class UserController extends Controller
                 "avatar_url" => $userInfo->avatarUrl,
                 "created_at" => date('Y-m-d h:i:s', time())
             ));
+            $result->phone_number = "";
         } else {
             $result->user_id = $user->id;
+            $result->phone_number = $user->phone_number;
         }
 
         return successReply($result);
