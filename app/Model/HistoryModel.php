@@ -152,7 +152,8 @@ class HistoryModel extends Model implements BaseModel
      *
      * 体质类型
      */
-    public function getPhysiqueTypeAttribute($value) {
+    public function getPhysiqueTypeAttribute($value)
+    {
         return json_decode($value);
     }
 
@@ -162,7 +163,8 @@ class HistoryModel extends Model implements BaseModel
      *
      * 兼有体质类型
      */
-    public function getPhysiqueTypeBothAttribute($value) {
+    public function getPhysiqueTypeBothAttribute($value)
+    {
         return json_decode($value);
     }
 
@@ -172,7 +174,8 @@ class HistoryModel extends Model implements BaseModel
      *
      * 倾向体质类型
      */
-    public function getPhysiqueTypeTrendAttribute($value) {
+    public function getPhysiqueTypeTrendAttribute($value)
+    {
         return json_decode($value);
     }
 
@@ -186,6 +189,15 @@ class HistoryModel extends Model implements BaseModel
     {
         // TODO: Implement insert() method.
         return DB::table($this->table)->insertGetId($insertData);
+    }
+
+    /**
+     * 关联用户表数据
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user() {
+        return $this->hasOne(UserModel::class, 'id', 'user_id');
     }
 
     /**
@@ -208,6 +220,23 @@ class HistoryModel extends Model implements BaseModel
     public function getHistoryByUserId($user_id)
     {
         return $this->queryData()->where("user_id", "=", $user_id)->get();
+    }
+
+    /**
+     * 根据uid 和 页码获取数据
+     *
+     * @param $uid
+     * @param $page
+     * @param int $size
+     * @return array
+     */
+    public function getHistoryListByUid($page, $uid = 0, $size = 10)
+    {
+        $model = $uid == 0 ? $this->queryData()->with('user') : $this->queryData()->with('user')->where("user_id", "=", $uid);
+        return array(
+            "total" => $model->count(),
+            "data" => $model->skip(getOffset($page, $size))->take($size)->get()
+        );
     }
 
 }

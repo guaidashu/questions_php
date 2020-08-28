@@ -30,6 +30,7 @@ Route::prefix('admin')->group(function () {
     Route::get('get_physique_list', 'admin\PhysiqueController@getPhysiqueList');
     Route::get('init_table', 'api\CreateTableController@createTable');
     Route::delete('delete_physique', 'admin\PhysiqueController@deletePhysique');
+    Route::get('get_history_list', 'admin\HistoryController@getHistoryList');
 });
 
 Route::prefix('api')->group(function () {

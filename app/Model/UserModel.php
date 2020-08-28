@@ -133,4 +133,16 @@ class UserModel extends Model implements BaseModel
     {
         return $this->queryData()->where("open_id", "=", $open_id)->first();
     }
+
+    /**
+     * 通过电话号码获取uid
+     *
+     * @param $phone_number
+     * @return int|int
+     */
+    public function getUidByPhoneNumber($phone_number)
+    {
+        $data = $this->queryData()->where("phone_number", "=", $phone_number)->first();
+        return !(empty($data->id)) ? $data->id : 0;
+    }
 }
