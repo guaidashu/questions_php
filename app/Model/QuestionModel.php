@@ -182,7 +182,7 @@ class QuestionModel extends Model implements BaseModel
      */
     public function getAll()
     {
-        return QuestionModel::with('physique')->where("status", "=", 1)->get();
+        return QuestionModel::with('physique')->orderBy('body_type')->where("status", "=", 1)->get();
     }
 
     /**
