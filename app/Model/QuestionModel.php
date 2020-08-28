@@ -171,7 +171,7 @@ class QuestionModel extends Model implements BaseModel
     {
         $db = $this->queryData()->with('physique');
         $count = $db->count("id");
-        $data = $db->skip(getOffset($page, $size))->take($size)->get();
+        $data = $db->orderBy('body_type')->skip(getOffset($page, $size))->take($size)->get();
         return pagination($data, $count);
     }
 
