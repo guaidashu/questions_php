@@ -85,6 +85,7 @@ class PhysiqueController extends Controller
         $model->level = $data["level"];
         $model->name = $data["name"];
         $model->desc = $data["desc"];
+        $model->conditioning = $data["conditioning"];
 
         return successReply($model->save());
     }
