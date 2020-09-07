@@ -49,6 +49,7 @@ class HistoryController extends Controller
         $N = 0;
         $phzScore = 0;
         $phzDesc = "";
+        $phzConditioning = "";
 
         $data["physique_type"] = array();
         $data["physique_type_both"] = array();
@@ -68,6 +69,7 @@ class HistoryController extends Controller
             if ($v["physique_name"] == "平和体质") {
                 $phzScore = $v["score"];
                 $phzDesc = $v["physique_desc"];
+                $phzConditioning = $v["conditioning"];
                 continue;
             }
 
@@ -93,19 +95,22 @@ class HistoryController extends Controller
         if ($phzScore >= 60 && $max < 30) {
             $data["physique_type"][] = array(
                 "name" => "平和质",
-                "desc" => $phzDesc
+                "desc" => $phzDesc,
+                "conditioning" => $phzConditioning
             );
         } else if ($phzScore >= 60 && $max >= 30 && $max <= 39) {
             // 基本是平和体质
             $data["physique_type"][] = array(
                 "name" => "基本是平和质",
-                "desc" => $phzDesc
+                "desc" => $phzDesc,
+                "conditioning" => $phzConditioning
             );
             foreach ($data["result"] as $k => $v) {
                 if ($max == $v["score"]) {
                     $data["physique_type_trend"][] = array(
                         "name" => $v["physique_name"],
-                        "desc" => $v["physique_desc"]
+                        "desc" => $v["physique_desc"],
+                        "conditioning" => $v["conditioning"]
                     );
                 }
             }
@@ -120,7 +125,8 @@ class HistoryController extends Controller
                     if ($v["score"] == $max) {
                         $data["physique_type"][] = array(
                             "name" => $v["physique_name"],
-                            "desc" => $v["physique_desc"]
+                            "desc" => $v["physique_desc"],
+                            "conditioning" => $v["conditioning"]
                         );
                     }
                 }
@@ -140,7 +146,8 @@ class HistoryController extends Controller
                         if ($v["score"] == $second) {
                             $data["physique_type_both"][] = array(
                                 "name" => $v["physique_name"],
-                                "desc" => $v["physique_desc"]
+                                "desc" => $v["physique_desc"],
+                                "conditioning" => $v["conditioning"]
                             );
                         }
                     }
