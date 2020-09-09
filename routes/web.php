@@ -31,7 +31,7 @@ Route::prefix('admin')->group(function () {
     Route::get('init_table', 'api\CreateTableController@createTable');
     Route::delete('delete_physique', 'admin\PhysiqueController@deletePhysique');
     Route::get('get_history_list', 'admin\HistoryController@getHistoryList');
-    Route::get('update_physique', 'admin\PhysiqueController@updatePhysique');
+    Route::put('update_physique', 'admin\PhysiqueController@updatePhysique');
 });
 
 Route::prefix('api')->group(function () {
