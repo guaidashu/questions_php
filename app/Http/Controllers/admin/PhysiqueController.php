@@ -10,7 +10,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\PhysiqueModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 /**
  * 体质 控制器

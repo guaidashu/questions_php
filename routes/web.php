@@ -32,6 +32,8 @@ Route::prefix('admin')->group(function () {
     Route::delete('delete_physique', 'admin\PhysiqueController@deletePhysique');
     Route::get('get_history_list', 'admin\HistoryController@getHistoryList');
     Route::put('update_physique', 'admin\PhysiqueController@updatePhysique');
+    Route::get("ueditor_action", 'admin\UeditorController@action');
+    Route::get("ueditor_file", 'admin\UeditorController@file');
 });
 
 Route::prefix('api')->group(function () {
