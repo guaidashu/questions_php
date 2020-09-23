@@ -52,6 +52,8 @@ class PhysiqueController extends Controller
     public function addPhysique(Request $request)
     {
         $data = $request->post();
+        $data["desc"] = base64_decode($data["desc"]);
+        $data["conditioning"] = base64_decode($data["conditioning"]);
         $result = $this->physiqueModel->insert($data);
         return successReply($result);
     }
@@ -84,7 +86,7 @@ class PhysiqueController extends Controller
         $model->level = $data["level"];
         $model->name = $data["name"];
         $model->desc = base64_decode($data["desc"]);
-        $model->conditioning = $data["conditioning"];
+        $model->conditioning = base64_decode($data["conditioning"]);
 
         return successReply($model->save());
     }
