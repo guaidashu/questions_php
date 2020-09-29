@@ -90,4 +90,21 @@ class PhysiqueController extends Controller
 
         return successReply($model->save());
     }
+
+    /**
+     * @param Request $request
+     * @return array|false|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|string|null
+     */
+    public function getConditioningById(Request $request)
+    {
+        $conditioning_id = $request->query("conditioning_id");
+
+        if (empty($conditioning_id)) {
+            return errReply();
+        }
+
+        $data = $this->physiqueModel->getConditioningById($conditioning_id);
+
+        return successReply($data);
+    }
 }

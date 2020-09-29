@@ -34,6 +34,8 @@ Route::prefix('admin')->group(function () {
     Route::put('update_physique', 'admin\PhysiqueController@updatePhysique');
     Route::get("ueditor_action", 'admin\UeditorController@action');
     Route::get("ueditor_file", 'admin\UeditorController@file');
+    Route::post("logout", "admin\UserController@logout");
+    Route::get("get_conditioning_by_id", "admin\PhysiqueController@getConditioningById");
 });
 
 Route::prefix('api')->group(function () {

@@ -120,4 +120,13 @@ class PhysiqueModel extends Model implements BaseModel
         $data->status = 0;
         return $data->save();
     }
+
+    /**
+     * @param $id
+     * @return Builder|Model|object|null
+     */
+    public function getConditioningById($id)
+    {
+        return $this->queryData()->where("id", "=", $id)->first();
+    }
 }
