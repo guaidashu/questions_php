@@ -49,9 +49,9 @@ class HistoryController extends Controller
         // 先通过电话号码获取用户user_id
         $userModel = new UserModel();
         $uid = $userModel->getUidByPhoneNumber($phone_number);
-        if ($uid == 0) {
+        if ($uid == 0 || empty($phone_number)) {
             $data = $this->historyModel->getHistoryListByUid($page);
-        }else{
+        } else {
             $data = $this->historyModel->getHistoryListByUid($page, $uid);
         }
 
