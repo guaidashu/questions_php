@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
     Route::get("ueditor_file", 'admin\UeditorController@file');
     Route::post("logout", "admin\UserController@logout");
     Route::get("get_conditioning_by_id", "admin\PhysiqueController@getConditioningById");
+    Route::get("get_history_by_id", "admin\HistoryController@getHistoryById");
 });
 
 Route::prefix('api')->group(function () {

@@ -57,4 +57,20 @@ class HistoryController extends Controller
 
         return successReply($data);
     }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
+     */
+    public function getHistoryById(Request $request) {
+        $history_id = $request->query("history_id");
+
+        if (empty($history_id)) {
+            return errReply("failed");
+        }
+
+        $data = $this->historyModel->getHistoryById($history_id);
+
+        return successReply($data);
+    }
 }

@@ -235,7 +235,7 @@ class HistoryModel extends Model implements BaseModel
         $model = $uid == 0 ? $this->queryData()->with('user') : $this->queryData()->with('user')->where("user_id", "=", $uid);
         return array(
             "total" => $model->count(),
-            "data" => $model->orderByDesc('id')->skip(getOffset($page, $size))->take($size)->get()
+            "data" => $model->orderByDesc('id')->skip(getOffset($page, $size))->take($size)->get(["id", "created_at", "user_id"])
         );
     }
 
