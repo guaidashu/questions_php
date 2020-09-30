@@ -219,7 +219,7 @@ class HistoryModel extends Model implements BaseModel
      */
     public function getHistoryByUserId($user_id)
     {
-        return $this->queryData()->where("user_id", "=", $user_id)->get();
+        return $this->queryData()->where("user_id", "=", $user_id)->get(['id', 'result', 'created_at', 'physique_type', 'physique_type_both', 'physique_type_trend']);
     }
 
     /**
