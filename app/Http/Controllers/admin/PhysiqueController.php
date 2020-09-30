@@ -43,6 +43,12 @@ class PhysiqueController extends Controller
         return successReply(pagination($data, count($data)));
     }
 
+    public function getPhysiqueConditioning() {
+        $data = $this->physiqueModel->getConditioning();
+
+        return successReply($data);
+    }
+
     /**
      * 新增体质数据
      *

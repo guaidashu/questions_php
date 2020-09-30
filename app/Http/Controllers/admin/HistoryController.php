@@ -42,13 +42,15 @@ class HistoryController extends Controller
         }
 
         $phone_number = $request->query("phone_number");
+        $nickName = $request->query("nickName");
         // if (empty($phone_number)) {
         //     return errReply('请输入电话号码');
         // }
 
         // 先通过电话号码获取用户user_id
         $userModel = new UserModel();
-        $uid = $userModel->getUidByPhoneNumber($phone_number);
+        $uid = $userModel->getUidByPhoneNumber($phone_number, $nickName);
+
         if ($uid == 0 || empty($phone_number)) {
             $data = $this->historyModel->getHistoryListByUid($page);
         } else {

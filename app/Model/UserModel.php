@@ -138,11 +138,22 @@ class UserModel extends Model implements BaseModel
      * 通过电话号码获取uid
      *
      * @param $phone_number
+     * @param $nickName
      * @return int|int
      */
-    public function getUidByPhoneNumber($phone_number)
+    public function getUidByPhoneNumber($phone_number, $nickName)
     {
         $data = $this->queryData()->where("phone_number", "=", $phone_number)->first();
+        return !(empty($data->id)) ? $data->id : 0;
+    }
+
+    /**
+     * @param $nickName
+     * @return int|mixed
+     */
+    public function getUidByNickName($nickName)
+    {
+        $data = $this->queryData()->where("nickName", "=", $nickName)->first();
         return !(empty($data->id)) ? $data->id : 0;
     }
 }

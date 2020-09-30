@@ -109,6 +109,14 @@ class PhysiqueModel extends Model implements BaseModel
     }
 
     /**
+     * @return Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getConditioning()
+    {
+        return $this->queryData()->get(['id', 'conditioning']);
+    }
+
+    /**
      * @param $id
      * @return bool
      *
@@ -127,6 +135,6 @@ class PhysiqueModel extends Model implements BaseModel
      */
     public function getConditioningById($id)
     {
-        return $this->queryData()->where("id", "=", $id)->first();
+        return $this->queryData()->where("id", "=", $id)->first(['conditioning']);
     }
 }
