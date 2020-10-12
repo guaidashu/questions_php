@@ -64,7 +64,8 @@ class HistoryController extends Controller
      * @param Request $request
      * @return array|false|string
      */
-    public function getHistoryById(Request $request) {
+    public function getHistoryById(Request $request)
+    {
         $history_id = $request->query("history_id");
 
         if (empty($history_id)) {
@@ -72,6 +73,27 @@ class HistoryController extends Controller
         }
 
         $data = $this->historyModel->getHistoryById($history_id);
+
+        return successReply($data);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * 根据条件获取导出数据
+     * @return array|false|string
+     */
+    public function getExportData(Request $request)
+    {
+        $phoneNumber = $request->query("phoneNumber");
+        $nickName = $request->query("nickName");
+        $startTime = $request->query("startTime");
+        $endTime = $request->query("endTime");
+        // 要导出的字段
+        $columns = $request->query("columns");
+        $userList = $request->query("userList");
+
+        $data = $this->historyModel->getExportData($phoneNumber, $nickName, $startTime, $endTime, $columns, $userList);
 
         return successReply($data);
     }

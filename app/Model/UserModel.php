@@ -156,4 +156,13 @@ class UserModel extends Model implements BaseModel
         $data = $this->queryData()->where("nickName", "=", $nickName)->first();
         return !(empty($data->id)) ? $data->id : 0;
     }
+
+    /**
+     * @return Builder[]|\Illuminate\Database\Eloquent\Collection
+     *
+     * 获取所有用户
+     */
+    public function getAll() {
+        return $this->queryData()->get(['id', 'username', 'phone_number']);
+    }
 }

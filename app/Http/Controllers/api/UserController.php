@@ -84,6 +84,10 @@ class UserController extends Controller
     {
         $data = $request->post();
 
+        if (empty($data["user_id"])) {
+            return errReply("请先登录");
+        }
+
         $user = $this->userModel->queryData()->find($data["user_id"]);
 
         // 判断用户是否 已经有电话号码，已经存在则直接返回即可

@@ -196,7 +196,8 @@ class HistoryModel extends Model implements BaseModel
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user() {
+    public function user()
+    {
         return $this->hasOne(UserModel::class, 'id', 'user_id');
     }
 
@@ -237,6 +238,48 @@ class HistoryModel extends Model implements BaseModel
             "total" => $model->count(),
             "data" => $model->orderByDesc('id')->skip(getOffset($page, $size))->take($size)->get(["id", "created_at", "user_id"])
         );
+    }
+
+    /**
+     * @param $phoneNumber
+     * @param $nickName
+     * @param $startTime
+     * @param $endTime
+     * @param $columns
+     * @param $userList
+     * @return Builder[]|\Illuminate\Database\Eloquent\Collection
+     *
+     * 根据条件获取导出数据
+     */
+    public function getExportData($phoneNumber, $nickName, $startTime, $endTime, $columns, $userList)
+    {
+        $db = $this->queryData()->with('user');
+        if (!empty($startTime)) {
+            $db = $db->where("created_at", ">=", $startTime);
+        }
+
+        if (!empty($endTime)) {
+            $db = $db->where("created_at", "<=", $endTime);
+        }
+
+        $userIdArr = [];
+        if (!empty($userList) && count($userList) > 0) {
+            foreach ($userList as $k => $v) {
+                $tmp = json_decode($v);
+                $userIdArr[] = ["user_id", "=", $tmp->id, 'OR'];
+            }
+
+            $db = $db->where($userIdArr);
+        }
+
+        if (!empty($columns) && count($columns) > 0) {
+            $columns[] = 'id';
+            $columns[] = 'user_id';
+            $columns[] = 'created_at';
+            return $db->get($columns);
+        }
+
+        return $db->get(['id', 'user_id', 'created_at']);
     }
 
 }

@@ -3,14 +3,24 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\UserModel;
 use Illuminate\Http\Request;
 
-class UserController
+class UserController extends Controller
 {
+    private $userModel;
+
     public function __construct()
     {
+        $this->userModel = new UserModel();
     }
 
+    /**
+     * @param Request $request
+     * @return array|false|string
+     *
+     * 登录
+     */
     public function login(Request $request)
     {
         $data = $request->post();
@@ -37,6 +47,12 @@ class UserController
 
     }
 
+    /**
+     * @param Request $request
+     * @return array|false|string
+     *
+     * 获取信息
+     */
     public function getInfo(Request $request)
     {
 
@@ -53,7 +69,7 @@ class UserController
                     "super_admin"
                 )
             );
-        }else {
+        } else {
             $data = array(
                 "user_id" => "1",
                 "name" => "admin",
@@ -67,8 +83,26 @@ class UserController
         return successReply($data);
     }
 
+    /**
+     * @param Request $request
+     * @return array|false|string
+     *
+     * 登出
+     */
     public function logout(Request $request)
     {
         return successReply("ok");
+    }
+
+    /**
+     * @param Request $request
+     * @return array|false|string
+     *
+     * 获取用户列表
+     */
+    public function getUserList(Request $request)
+    {
+        $list = $this->userModel->getAll();
+        return successReply($list);
     }
 }
