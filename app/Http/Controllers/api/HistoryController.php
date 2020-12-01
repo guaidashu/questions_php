@@ -114,6 +114,17 @@ class HistoryController extends Controller
                     );
                 }
             }
+        } else if ($max >= 30 && $max <= 39) {
+            // 平和质分数没有大于60的情况
+            foreach ($data["result"] as $k => $v) {
+                if ($max == $v["score"]) {
+                    $data["physique_type_trend"][] = array(
+                        "name" => $v["physique_name"],
+                        "desc" => $v["physique_desc"],
+                        "conditioning" => $v["conditioning"]
+                    );
+                }
+            }
         } else {
             // 应该判断多个主体质类型
             if ($max >= 40) {
