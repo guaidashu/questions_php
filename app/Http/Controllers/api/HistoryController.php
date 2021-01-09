@@ -116,11 +116,7 @@ class HistoryController extends Controller
             }
         } else if ($max >= 30 && $max <= 39) {
             // 平和质分数没有大于60的情况
-            $data["physique_type"][] = array(
-                "name" => "无",
-                "desc" => "",
-                "conditioning" => 0
-            );
+            $data["physique_type"][] = array();
             foreach ($data["result"] as $k => $v) {
                 if ($max == $v["score"]) {
                     $data["physique_type_trend"][] = array(

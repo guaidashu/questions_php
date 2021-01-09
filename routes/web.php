@@ -52,5 +52,6 @@ Route::prefix('api')->group(function () {
     Route::get('login', 'api\UserController@login');
     Route::post('decrypt_phone_number', 'api\UserController@decryptPhoneNumber');
     Route::get('get_physique_type', "admin\PhysiqueController@getPhysiqueConditioning");
+    Route::get('img', 'api\ImageController@img');
 });
 
